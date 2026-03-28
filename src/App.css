@@ -59,7 +59,19 @@ textarea {
   border: 1px solid gray;
   padding: 10px;
   width: 200px;
-  height: 150px;
+  height: 180px;
+  margin-bottom: 10px;
+  background-color: lightyellow;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  overflow-wrap: break-word;
+}
+
+.entry-card-expanded {
+  border: 1px solid gray;
+  padding: 10px;
+  width: 200px;
+  height: auto;
   margin-bottom: 10px;
   background-color: lightyellow;
   border-radius: 5px;
@@ -76,4 +88,16 @@ textarea {
   float: right;
   margin-right: 1px;
   margin-top: 1px;
+}
+
+.expand-btn {
+  background-color: lightyellow;
+  color: black;
+  border: none;
+  padding: 1px 1px;
+  cursor: pointer;
+  float: right;
+  margin-right: 1px;
+  margin-bottom: 1px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }

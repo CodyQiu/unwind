@@ -4,6 +4,7 @@ function Journal() {
   const [numEntries, setNumEntries] = useState(0);
   const [message, setMessage] = useState("");
   const [entries, setEntries] = useState([]);
+  const [expandedEntry, setExpandedEntry] = useState(null);
 
   useEffect(() => {
     const savedEntries =
@@ -22,8 +23,11 @@ function Journal() {
       );
       return;
     }
-    entries.push(newEntry);
-    localStorage.setItem("journalEntries", JSON.stringify(entries));
+    setEntries([...entries, newEntry]);
+    localStorage.setItem(
+      "journalEntries",
+      JSON.stringify([...entries, newEntry]),
+    );
     setNumEntries(numEntries + 1);
     document.querySelector("textarea").value = "";
     setMessage("Entry saved successfully!");
@@ -35,7 +39,13 @@ function Journal() {
     setNumEntries(numEntries - 1);
     setMessage("Entry deleted successfully!");
   };
-  const handleExpand = () => {};
+  const handleExpand = (id) => {
+    if (expandedEntry === id) {
+      setExpandedEntry(null);
+    } else {
+      setExpandedEntry(id);
+    }
+  };
   return (
     <div>
       <h2>Sleep Journal</h2>
@@ -65,7 +75,14 @@ function Journal() {
           .slice()
           .reverse()
           .map((entry) => (
-            <div key={entry.id} className="entry-card">
+            <div
+              key={entry.id}
+              className={
+                expandedEntry === entry.id
+                  ? "entry-card-expanded"
+                  : "entry-card"
+              }
+            >
               <button
                 className="delete-btn"
                 onClick={() => handleDelete(entry.id)}
@@ -78,8 +95,11 @@ function Journal() {
               )}
               {entry.content.length <= 150 && <p>{entry.content}</p>}
               {entry.content.length > 150 && (
-                <button className="expand-btn" onClick={handleExpand}>
-                  ...
+                <button
+                  className="expand-btn"
+                  onClick={() => handleExpand(entry.id)}
+                >
+                  Expand
                 </button>
               )}
             </div>
