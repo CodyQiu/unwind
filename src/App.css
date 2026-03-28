@@ -58,9 +58,13 @@ textarea {
 .entry-card {
   border: 1px solid gray;
   padding: 10px;
-  width: 15%;
+  width: 200px;
+  height: 150px;
   margin-bottom: 10px;
   background-color: lightyellow;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  overflow-wrap: break-word;
 }
 
 .delete-btn {

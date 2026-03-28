@@ -35,6 +35,7 @@ function Journal() {
     setNumEntries(numEntries - 1);
     setMessage("Entry deleted successfully!");
   };
+  const handleExpand = () => {};
   return (
     <div>
       <h2>Sleep Journal</h2>
@@ -72,7 +73,15 @@ function Journal() {
                 x
               </button>
               <p>{new Date(entry.id).toLocaleDateString()}</p>
-              {entry.content}
+              {entry.content.length > 150 && (
+                <p>{entry.content.slice(0, 150)}...</p>
+              )}
+              {entry.content.length <= 150 && <p>{entry.content}</p>}
+              {entry.content.length > 150 && (
+                <button className="expand-btn" onClick={handleExpand}>
+                  ...
+                </button>
+              )}
             </div>
           ))}
       </div>
