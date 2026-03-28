@@ -45,3 +45,31 @@ textarea {
     14px Arial,
     sans-serif;
 }
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  gap: 40px;
+}
+
+.entry-card {
+  border: 1px solid gray;
+  padding: 10px;
+  width: 15%;
+  margin-bottom: 10px;
+  background-color: lightyellow;
+}
+
+.delete-btn {
+  background-color: lightyellow;
+  color: black;
+  border: none;
+  padding: 1px 1px;
+  cursor: pointer;
+  float: right;
+  margin-right: 1px;
+  margin-top: 1px;
+}

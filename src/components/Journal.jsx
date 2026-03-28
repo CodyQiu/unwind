@@ -3,8 +3,14 @@ import React, { useState, useEffect } from "react";
 function Journal() {
   const [numEntries, setNumEntries] = useState(0);
   const [message, setMessage] = useState("");
+  const [entries, setEntries] = useState([]);
 
-  const entries = JSON.parse(localStorage.getItem("journalEntries")) || [];
+  useEffect(() => {
+    const savedEntries =
+      JSON.parse(localStorage.getItem("journalEntries")) || [];
+    setEntries(savedEntries);
+  }, []);
+
   const handleSave = () => {
     const newEntry = {
       id: Date.now(),
@@ -21,6 +27,13 @@ function Journal() {
     setNumEntries(numEntries + 1);
     document.querySelector("textarea").value = "";
     setMessage("Entry saved successfully!");
+  };
+  const handleDelete = (id) => {
+    const updatedEntries = entries.filter((entry) => entry.id !== id);
+    setEntries(updatedEntries);
+    localStorage.setItem("journalEntries", JSON.stringify(updatedEntries));
+    setNumEntries(numEntries - 1);
+    setMessage("Entry deleted successfully!");
   };
   return (
     <div>
@@ -46,23 +59,23 @@ function Journal() {
       {entries.length === 0 && (
         <p>Nothing here yet! Just thoughts, waiting to be formed...</p>
       )}
-      {entries
-        .slice()
-        .reverse()
-        .map((entry) => (
-          <div
-            key={entry.id}
-            style={{
-              border: "1px solid gray",
-              padding: "10px",
-              marginBottom: "10px",
-              backgroundColor: "lightyellow",
-            }}
-          >
-            <p>{new Date(entry.id).toLocaleDateString()}</p>
-            {entry.content}
-          </div>
-        ))}
+      <div className="container">
+        {entries
+          .slice()
+          .reverse()
+          .map((entry) => (
+            <div key={entry.id} className="entry-card">
+              <button
+                className="delete-btn"
+                onClick={() => handleDelete(entry.id)}
+              >
+                x
+              </button>
+              <p>{new Date(entry.id).toLocaleDateString()}</p>
+              {entry.content}
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
