@@ -74,36 +74,40 @@ function Journal() {
         {entries
           .slice()
           .reverse()
-          .map((entry) => (
-            <div
-              key={entry.id}
-              className={
-                expandedEntry === entry.id
-                  ? "entry-card-expanded"
-                  : "entry-card"
-              }
-            >
-              <button
-                className="delete-btn"
-                onClick={() => handleDelete(entry.id)}
+          .map((entry) => {
+            const isExpanded = expandedEntry === entry.id;
+            return (
+              <div
+                key={entry.id}
+                className={
+                  expandedEntry === entry.id
+                    ? "entry-card-expanded"
+                    : "entry-card"
+                }
               >
-                x
-              </button>
-              <p>{new Date(entry.id).toLocaleDateString()}</p>
-              {entry.content.length > 150 && (
-                <p>{entry.content.slice(0, 150)}...</p>
-              )}
-              {entry.content.length <= 150 && <p>{entry.content}</p>}
-              {entry.content.length > 150 && (
                 <button
-                  className="expand-btn"
-                  onClick={() => handleExpand(entry.id)}
+                  className="delete-btn"
+                  onClick={() => handleDelete(entry.id)}
                 >
-                  Expand
+                  x
                 </button>
-              )}
-            </div>
-          ))}
+                <p>{new Date(entry.id).toLocaleDateString()}</p>
+                {isExpanded ? (
+                  <p>{entry.content}</p>
+                ) : (
+                  <p>{entry.content.slice(0, 150)}</p>
+                )}
+                {entry.content.length > 150 && (
+                  <button
+                    className="expand-btn"
+                    onClick={() => handleExpand(entry.id)}
+                  >
+                    {isExpanded ? "Show Lesss" : "Read More"}
+                  </button>
+                )}
+              </div>
+            );
+          })}
       </div>
     </div>
   );
