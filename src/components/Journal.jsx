@@ -21,6 +21,9 @@ function Journal() {
       setMessage(
         "I know you have thoughts, let them out! Don't be shy, just write whatever comes to mind.",
       );
+      setTimeout(() => {
+        setMessage("");
+      }, 2500);
       return;
     }
     setEntries([...entries, newEntry]);
@@ -31,6 +34,9 @@ function Journal() {
     setNumEntries(numEntries + 1);
     document.querySelector("textarea").value = "";
     setMessage("Entry saved successfully!");
+    setTimeout(() => {
+      setMessage("");
+    }, 2500);
   };
   const handleDelete = (id) => {
     const updatedEntries = entries.filter((entry) => entry.id !== id);
@@ -38,6 +44,9 @@ function Journal() {
     localStorage.setItem("journalEntries", JSON.stringify(updatedEntries));
     setNumEntries(numEntries - 1);
     setMessage("Entry deleted successfully!");
+    setTimeout(() => {
+      setMessage("");
+    }, 2500);
   };
   const handleExpand = (id) => {
     if (expandedEntry === id) {
@@ -58,10 +67,14 @@ function Journal() {
       ></textarea>
       <button onClick={handleSave}>Save Entry</button>
       {message && message[0] === "I" && (
-        <p style={{ color: "#6c802a" }}>{message}</p>
+        <p className="message" style={{ color: "#6c802a" }}>
+          {message}
+        </p>
       )}
       {message && message[0] === "E" && (
-        <p style={{ color: "green" }}>{message}</p>
+        <p className="message" style={{ color: "green" }}>
+          {message}
+        </p>
       )}
       <br />
       <br />
