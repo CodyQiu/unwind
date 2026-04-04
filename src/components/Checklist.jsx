@@ -3,8 +3,18 @@ import { useState, useEffect } from "react";
 function Checklist() {
   const [completed, setCompleted] = useState(0);
   const [tasks, setTasks] = useState([
-    { id: 0, text: "Turn off all devices", completed: false, isCustom: false },
-    { id: 1, text: "Brush your teeth", completed: false, isCustom: false },
+    {
+      id: Date.now(),
+      text: "Turn off all devices",
+      completed: false,
+      isCustom: false,
+    },
+    {
+      id: Date.now() + 1,
+      text: "Brush your teeth",
+      completed: false,
+      isCustom: false,
+    },
   ]);
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem("checklistTasks"));
@@ -15,7 +25,8 @@ function Checklist() {
   }, []);
 
   const handleTask = (id) => {
-    if (tasks[id].completed) setCompleted(completed - 1);
+    const index = tasks.findIndex((task) => task.id === id);
+    if (tasks[index].completed) setCompleted(completed - 1);
     else setCompleted(completed + 1);
     setTasks(
       tasks.map((task) => {
@@ -28,19 +39,33 @@ function Checklist() {
   };
   const handleAdd = () => {
     const newTask = prompt("Enter a new task:");
+    for (let task of tasks) {
+      if (task.text === newTask) {
+        alert("You already have this task on your checklist!");
+        return;
+      }
+    }
     if (newTask) {
       setTasks([
         ...tasks,
-        { id: tasks.length, text: newTask, completed: false, isCustom: true },
+        { id: Date.now(), text: newTask, completed: false, isCustom: true },
       ]);
       localStorage.setItem(
         "checklistTasks",
         JSON.stringify([
           ...tasks,
-          { id: tasks.length, text: newTask, completed: false, isCustom: true },
+          { id: Date.now(), text: newTask, completed: false, isCustom: true },
         ]),
       );
     }
+  };
+
+  const handleDelete = (id) => {
+    const index = tasks.findIndex((task) => task.id === id);
+    if (tasks[index].completed) setCompleted(completed - 1);
+    const newTasks = tasks.filter((task) => task.id !== id);
+    setTasks(newTasks);
+    localStorage.setItem("checklistTasks", JSON.stringify(newTasks));
   };
 
   return (
@@ -62,10 +87,16 @@ function Checklist() {
                 type="checkbox"
                 checked={task.completed}
                 onChange={() => handleTask(task.id)}
-                id={task.text}
+                id={Date.now()}
                 name={task.text}
               />
               <label htmlFor={task.text}>{task.text}</label>
+              <button
+                className="delete-button"
+                onClick={() => handleDelete(task.id)}
+              >
+                x
+              </button>
             </div>
           );
         })}
