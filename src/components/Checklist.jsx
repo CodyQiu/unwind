@@ -6,6 +6,13 @@ function Checklist() {
     { id: 0, text: "Turn off all devices", completed: false, isCustom: false },
     { id: 1, text: "Brush your teeth", completed: false, isCustom: false },
   ]);
+  useEffect(() => {
+    const savedTasks = JSON.parse(localStorage.getItem("checklistTasks"));
+    if (savedTasks) {
+      setTasks(savedTasks);
+      setCompleted(savedTasks.filter((task) => task.completed).length);
+    }
+  }, []);
 
   const handleTask = (id) => {
     if (tasks[id].completed) setCompleted(completed - 1);
@@ -18,6 +25,22 @@ function Checklist() {
         return task;
       }),
     );
+  };
+  const handleAdd = () => {
+    const newTask = prompt("Enter a new task:");
+    if (newTask) {
+      setTasks([
+        ...tasks,
+        { id: tasks.length, text: newTask, completed: false, isCustom: true },
+      ]);
+      localStorage.setItem(
+        "checklistTasks",
+        JSON.stringify([
+          ...tasks,
+          { id: tasks.length, text: newTask, completed: false, isCustom: true },
+        ]),
+      );
+    }
   };
 
   return (
@@ -47,6 +70,10 @@ function Checklist() {
           );
         })}
       </div>
+      <h3 className="completed">
+        Completed: {completed}/{tasks.length}
+      </h3>
+      <button onClick={() => handleAdd()}>Add Task</button>
     </div>
   );
 }
