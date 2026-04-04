@@ -1,13 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
+
+:root {
+  --primary-color: #c47ca4;
+  --secondary-color: #f4d7e7;
+  --background-color: #ffcae4;
+  --surface-color: #fff1f6;
+  --text-color: #3f3340;
+  --muted-text-color: #7a6875;
+  --border-color: #e8c9d8;
+  --accent-color: #a65d84;
+  --font-heading: "Cormorant Garamond", serif;
+  --font-body: "Manrope", sans-serif;
+  --background-start: #fff7fb;
+  --background-middle: #f9e0ec;
+  --background-end: #f6c4df;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    var(--background-start) 0%,
+    var(--background-middle) 45%,
+    var(--background-end) 100%
+  );
+  font-family: var(--font-body);
+  color: var(--text-color);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+p,
+button,
+input,
+textarea,
+select,
+label,
+li {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+button {
+  font-weight: 600;
+  color: var(--surface-color);
+  background: linear-gradient(180deg, #d88ab5 0%, var(--primary-color) 100%);
+  border: 1px solid rgba(166, 93, 132, 0.12);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(166, 93, 132, 0.16);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+textarea,
+input,
+select {
+  font-weight: 500;
+}
+
 h1 {
   text-align: center;
   margin-top: 40px;
 }
 
 button {
-  place-items: center;
   margin: 10px;
   padding: 10px 20px;
   font-size: 16px;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(166, 93, 132, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
 }
 
 nav {
@@ -28,22 +107,25 @@ p {
 
 select {
   width: 110px;
-  padding: 2px 2px;
+  padding: 2px 8px;
   margin-top: 8px;
   height: 50px;
   font-size: 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.86);
+  color: var(--text-color);
 }
 
 textarea {
   padding: 10px;
   max-width: 100%;
   line-height: 1.5;
-  border-radius: 5px;
-  border: 1px solid #cccccc;
-  box-shadow: 1px 1px 1px #999999;
-  font:
-    14px Arial,
-    sans-serif;
+  border-radius: 18px;
+  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.84);
+  box-shadow: 0 12px 26px rgba(166, 93, 132, 0.08);
+  color: var(--text-color);
 }
 
 .container {
@@ -56,50 +138,52 @@ textarea {
 }
 
 .entry-card {
-  border: 1px solid gray;
-  padding: 10px;
+  border: 1px solid var(--border-color);
+  padding: 14px;
   width: 200px;
   height: 180px;
   margin-bottom: 10px;
-  background-color: lightyellow;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 241, 246, 0.92);
+  border-radius: 18px;
+  box-shadow: 0 14px 28px rgba(166, 93, 132, 0.1);
   overflow-wrap: break-word;
 }
 
 .entry-card-expanded {
-  border: 1px solid gray;
-  padding: 10px;
+  border: 1px solid var(--border-color);
+  padding: 14px;
   width: 200px;
   height: auto;
   margin-bottom: 10px;
-  background-color: lightyellow;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 241, 246, 0.96);
+  border-radius: 18px;
+  box-shadow: 0 14px 28px rgba(166, 93, 132, 0.1);
   overflow-wrap: break-word;
 }
 
 .delete-btn {
-  background-color: lightyellow;
-  color: black;
+  background: transparent;
+  color: var(--muted-text-color);
   border: none;
   padding: 1px 1px;
   cursor: pointer;
   float: right;
   margin-right: 1px;
   margin-top: 1px;
+  box-shadow: none;
 }
 
 .expand-btn {
-  background-color: lightyellow;
-  color: black;
+  background: transparent;
+  color: var(--accent-color);
   border: none;
   padding: 1px 1px;
   cursor: pointer;
   float: right;
   margin-right: 1px;
   margin-bottom: 1px;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: var(--font-body);
+  box-shadow: none;
 }
 
 .message {
@@ -144,6 +228,11 @@ textarea {
   align-items: center;
   margin-bottom: 10px;
   width: 300px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background-color: rgba(255, 241, 246, 0.88);
+  box-shadow: 0 10px 20px rgba(166, 93, 132, 0.08);
 }
 
 .completed {
