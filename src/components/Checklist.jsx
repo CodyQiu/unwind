@@ -10,6 +10,14 @@ function Checklist() {
   const handleTask = (id) => {
     if (tasks[id].completed) setCompleted(completed - 1);
     else setCompleted(completed + 1);
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === id) {
+          return { ...task, completed: !task.completed };
+        }
+        return task;
+      }),
+    );
   };
 
   return (
@@ -25,8 +33,9 @@ function Checklist() {
       <div className="checkboxes">
         {tasks.map((task) => {
           return (
-            <div>
+            <div key={task.id} className="checkbox-container">
               <input
+                className="checkbox"
                 type="checkbox"
                 checked={task.completed}
                 onChange={() => handleTask(task.id)}
