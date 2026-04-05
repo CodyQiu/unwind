@@ -1,16 +1,36 @@
-# React + Vite
+# Unwind
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Unwind is a sleep wellness web app designed to help users build healthier nighttime habits through guided breathing exercises, journaling, and a customizable sleep checklist.
+Live demo: https://unwind-dusky.vercel.app/
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Guided breathing exercise with inhale, hold, and exhale phases
+- Sleep journal with saved entries stored locally in the browser
+- Expandable journal cards for viewing longer entries
+- Customizable sleep checklist with task completion tracking
+- Persistent data using `localStorage` so entries and tasks remain after refresh
+- Soft, calming UI with custom typography and styled components
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- JavaScript
+- CSS
+- Vite
+- localStorage
 
-## Expanding the ESLint configuration
+## Local Setup
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+npm run dev
+
+```
+
+## Production
+
+This project is built for production using:
+
+```bash
+npm run build
