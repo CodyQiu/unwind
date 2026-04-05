@@ -41,6 +41,7 @@ function Breathing() {
   const resetButton = () => {
     setRunning(false);
     setPhase("inhale");
+    setCurrentRound(1);
     setTime(4);
   };
 
@@ -89,15 +90,27 @@ function Breathing() {
           Reset
         </button>
       </div>
-      <h3 style={{ textAlign: "center" }}>
-        {phase.charAt(0).toUpperCase() + phase.slice(1)}
-      </h3>
-      <p>
-        {time} seconds left of {phase}
-      </p>
-      <p>
-        Round {currentRound} of {rounds}
-      </p>
+
+      <div className="breathing-container">
+        <div className={`breathing-circle ${running ? phase : ""}`}>
+          <span>
+            <div
+              className="breathing-info"
+              style={{ textAlign: "center", marginTop: "20px" }}
+            >
+              <h3 style={{ textAlign: "center" }}>
+                {phase.charAt(0).toUpperCase() + phase.slice(1)}
+              </h3>
+              <p>
+                {time} seconds left of {phase}
+              </p>
+              <p>
+                Round {currentRound} of {rounds}
+              </p>
+            </div>
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
